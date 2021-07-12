@@ -6,8 +6,7 @@
 </head>
 <body style="background: #F3F3F3;">
 	<?php 
-		define("filepath", "data.txt");
-
+		require 'DatabaseOperations.php';
         $userName = $password = $email = "";
         $userNameErr = $passwordErr = "";
         $successfulMessage = $errorMessage = "";
@@ -28,25 +27,19 @@
 	        }
 	        if(!$flag)
 	        {
-	        	 $userName = test_input($userName);
-	        	 $password = htmlspecialchars($password);
+	        	$userName = test_input($userName);
+	        	$password = htmlspecialchars($password);
 
-	        	 $fileData = read();
-	    		 $fileDataExplode = json_decode($fileData,true);
-	    		 
-		    	foreach((object)$fileDataExplode as $candidate) {
-				    if($candidate['userName'] === $userName and $candidate['password'] === $password)
-				    {
-				    	$logFlag = True;
-				    	header('Location: \log in\welcomePage.html ');
-				    }
-			    }
-
-			    if(!$logFlag)
-			    {
-			    	$errorMessage = "log-in failed";
-			    }
-			    
+	        	$res = login($userName, $password);
+	        	if($res)
+	        	{
+	        		header("Location: welcomePage.php");
+	        	}
+	        	else
+	        	{
+	        		$logFlag = true;
+	        		$errorMessage = "log-in failed";
+	        	} 		    
 	        }
 	    }
 
@@ -56,17 +49,6 @@
 	        $data = htmlspecialchars($data);
 	        return $data;
         }
-
-        function read() {
-		    $resource = fopen(filepath, "r");
-		    $fz = filesize(filepath);
-		    $fr = "";
-		    if($fz > 0) {
-		    	$fr = fread($resource, $fz);
-	    	}
-		    fclose($resource);
-		    return $fr;
-		}
 	    
     ?>
 

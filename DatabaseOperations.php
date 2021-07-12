@@ -1,4 +1,5 @@
 <?php 
+
 	function connect()
 	{
 		$conn = new mysqli("localhost", "tester", "123", "wtk");
@@ -22,7 +23,7 @@
 		$conn = connect();
 		$sql = $conn->prepare("SELECT * FROM users WHERE userName = ? and password = ?");
 		$sql->bind_param("ss", $userName, $password);
-		return $sql->execute();
+		$sql->execute();
 		$res = $sql->get_result();
 		return $res->num_rows === 1;
 	}
@@ -32,7 +33,7 @@
 		$conn = connect();
 		$sql = $conn->prepare("SELECT * FROM users WHERE userName = ?");
 		$sql->bind_param("s", $userName);
-		return $sql->execute();
+		$sql->execute();
 		$res = $sql->get_result();
 		return $res->num_rows === 1;
 	}

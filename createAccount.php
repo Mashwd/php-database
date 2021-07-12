@@ -91,8 +91,6 @@
 	        $phone = test_input($_POST['phone']);
 			
 	        $result1 = register($firstName, $lastName, $gender, $birthday, $religion, $email, $userName, $password, $pAddress, $perAddress, $phone, $weblink);
-	        var_dump($result1);
-	        echo "<br>" . $result1;
 	        if($result1) {
 	        	$successfulMessage = "Successfully saved.";
 	        }
@@ -159,10 +157,10 @@
 			    <label for="religion">Religion<span style="color: red;">*</span>:</label>
 			    <select id="religion" name="religion" value ="<?php echo $religion; ?>">
 				    <option value="">None</option>
-				    <option <?php if (!empty($_POST['religion']) &&$_POS['religion'] == 'muslim') { ?>selected="true" <?php }; ?>value="muslim">Muslim</option>
-				    <option <?php if (!empty($_POST['religion']) &&$_POS['religion'] == 'hindu') { ?>selected="true" <?php }; ?>value="hindu">Hindu</option>
-				    <option <?php if (!empty($_POST['religion']) &&$_POS['religion'] == 'buddist') { ?>selected="true" <?php }; ?>value="buddist">Buddist</option>
-				    <option <?php if (!empty($_POST['religion']) &&$_POS['religion'] == 'christian') { ?>selected="true" <?php }; ?>value="christian">Christian</option>
+				    <option <?php if (!empty($_POST['religion']) &&$_POST['religion'] == 'muslim') { ?>selected="true" <?php }; ?>value="muslim">Muslim</option>
+				    <option <?php if (!empty($_POST['religion']) &&$_POST['religion'] == 'hindu') { ?>selected="true" <?php }; ?>value="hindu">Hindu</option>
+				    <option <?php if (!empty($_POST['religion']) &&$_POST['religion'] == 'buddist') { ?>selected="true" <?php }; ?>value="buddist">Buddist</option>
+				    <option <?php if (!empty($_POST['religion']) &&$_POST['religion'] == 'christian') { ?>selected="true" <?php }; ?>value="christian">Christian</option>
 			    </select>
 			    <span style="color: red;"><?php echo $religionErr; ?></span>
 			</fieldset>
@@ -224,6 +222,10 @@
 		</form>
 
 		<span style="color: green;"><?php echo $successfulMessage; ?></span>
+
+		<br>
+
+		<span>Already have an account?<a href="log-in.php">log in</a></span>
 
 </div>
 </body>
